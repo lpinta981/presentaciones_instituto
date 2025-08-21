@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación: Tayta Cuysito</title>
+    <style>
+        /* --- Configuración General --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+        :root {
+            --color-primario: #16275e; /* Azul oscuro */
+            --color-secundario: #9a7c00; /* Dorado */
+            --color-fondo: #f4f4f9;
+            --color-texto: #333;
+            --font-titulos: 'Playfair Display', serif;
+            --font-cuerpo: 'Montserrat', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-cuerpo);
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            overflow: hidden; /* Evita el scroll de la página principal */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Contenedor Principal de la Presentación --- */
+        .presentacion-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 800px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+        }
+
+        /* --- Estilo de las Diapositivas --- */
+        .diapositiva {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            background: linear-gradient(135deg, #ffffff, #eef2f3);
+        }
+
+        .diapositiva.activa {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 1;
+        }
+        
+        .diapositiva.anterior {
+            transform: translateX(-100%);
+        }
+
+        /* --- Contenido de las Diapositivas --- */
+        .diapositiva h1, .diapositiva h2 {
+            font-family: var(--font-titulos);
+            color: var(--color-primario);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .diapositiva h1 {
+            font-size: 3.5rem;
+        }
+
+        .diapositiva h2 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--color-secundario);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .diapositiva p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo {
+            max-width: 200px;
+            margin: 1rem auto;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .eslogan {
+            font-style: italic;
+            color: var(--color-secundario);
+            font-size: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        /* --- Estilos Específicos por Diapositiva --- */
+        
+        /* Slide 2: Razón del emprendimiento */
+        .contenido-split {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            width: 100%;
+        }
+        .contenido-split .texto {
+            flex: 1;
+            text-align: left;
+        }
+        .contenido-split .imagen {
+            flex-basis: 300px;
+            text-align: center;
+        }
+         .contenido-split .texto p {
+            text-align: left;
+         }
+
+        /* Slide 3: Responsabilidades */
+        .lista-roles {
+            list-style: none;
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .lista-roles li {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--color-primario);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lista-roles li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .lista-roles strong {
+            color: var(--color-primario);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Slide 4: Legal y Aportes */
+        .tabla-moderna {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .tabla-moderna th, .tabla-moderna td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+        .tabla-moderna thead th {
+            background-color: var(--color-primario);
+            color: white;
+            font-family: var(--font-cuerpo);
+        }
+        .tabla-moderna tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+        .tabla-moderna tbody tr:nth-of-type(even) {
+            background-color: #f8f9fa;
+        }
+        .tabla-moderna tbody tr:last-of-type {
+            border-bottom: 2px solid var(--color-secundario);
+        }
+        .info-legal {
+            margin-top: 2rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Slide 5: Agradecimiento */
+        .logo-instituto {
+            max-width: 150px;
+            margin-bottom: 2rem;
+        }
+        .integrantes {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color-primario);
+            margin-top: 2rem;
+        }
+
+        /* --- Indicador de Navegación --- */
+        .indicador-navegacion {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: #aaa;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.7);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .diapositiva {
+                padding: 2rem;
+                overflow-y: auto;
+            }
+            .diapositiva h1 { font-size: 2.5rem; }
+            .diapositiva h2 { font-size: 2rem; }
+            .contenido-split {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .contenido-split .imagen {
+                order: -1;
+            }
+            .contenido-split .texto, .contenido-split .texto p {
+                text-align: center;
+            }
+            .lista-roles {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentacion-container">
+
+        <!-- Diapositiva 1: Título -->
+        <div class="diapositiva activa" id="diapositiva-1">
+            <img src="https://lh3.googleusercontent.com/d/1VJ9rPywa8rLOdSEk8lK1mnme2_BQYJGX=w2048?name=unnamed.jpg" 
+                 alt="Logotipo de Tayta Cuysito" 
+                 class="logo"
+                 onerror="this.style.display='none'">
+            <h1>Tayta Cuysito</h1>
+            <p class="eslogan">Porque somos el papá de los cuyes.</p>
+        </div>
+
+        <!-- Diapositiva 2: Razón del Emprendimiento e Imagen -->
+        <div class="diapositiva" id="diapositiva-2">
+            <h2>Razón del Emprendimiento</h2>
+            <div class="contenido-split">
+                <div class="texto">
+                    <p>
+                        En el Barrio San Francisco N°2 se evidenció la falta de producción de cuyes de alto nivel (bonitos y gorditos). Nuestra asociación, conformada por 12 moradores, surge para cubrir esta necesidad.
+                    </p>
+                    <p>
+                        Estudiamos las razas más grandes para proveer a los vendedores locales un producto de mayor calidad a un precio competitivo, eliminando costos de transporte y con una visión de ser referentes nacionales e internacionales.
+                    </p>
+                </div>
+                <div class="imagen">
+                    <img src="https://lh3.googleusercontent.com/d/1VJ9rPywa8rLOdSEk8lK1mnme2_BQYJGX=w2048?name=unnamed.jpg" 
+                         alt="Logotipo de Tayta Cuysito" 
+                         class="logo"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 3: Responsabilidades -->
+        <div class="diapositiva" id="diapositiva-3">
+            <h2>Responsabilidades del Equipo</h2>
+            <ul class="lista-roles">
+                <li><strong>Rosita Altamirano:</strong> Experta en crianza, liderará el equipo de alimentación y cuidado de los cuyes.</li>
+                <li><strong>Jessica Nishve:</strong> Encargada de la distribución y logística de nuestro delicioso producto.</li>
+                <li><strong>Luis Pinta:</strong> Experto en Administración, se encargará de la gestión "empresarial" integral.</li>
+                <li><strong>Pedro Ramírez:</strong> Especialista en marketing y ventas, enfocado en la promoción y expansión.</li>
+                <li><strong>Ana Cárdenas:</strong> Contadora, responsable de la gestión financiera y cumplimiento tributario.</li>
+                <li><strong>Carlos Quishpe:</strong> Veterinario, encargado de la salud animal y buenas prácticas de manejo.</li>
+            </ul>
+        </div>
+
+        <!-- Diapositiva 4: Sección Legal y Aportes -->
+        <div class="diapositiva" id="diapositiva-4">
+            <h2>Aspectos Legales y Aportes</h2>
+             <table class="tabla-moderna">
+                <thead>
+                    <tr>
+                        <th>Socio</th>
+                        <th>Aporte Inicial (USD)</th>
+                        <th>Tipo de Aporte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Rosita Altamirano</td><td>2,000</td><td>Capital, Conocimiento</td></tr>
+                    <tr><td>Jessica Nishve</td><td>1,500</td><td>Capital, Redes</td></tr>
+                    <tr><td>Luis Pinta</td><td>2,500</td><td>Capital, Conocimiento</td></tr>
+                    <tr><td>Pedro Ramírez</td><td>1,800</td><td>Capital, Experiencia</td></tr>
+                    <tr><td>Ana Cárdenas</td><td>2,200</td><td>Capital, Conocimiento</td></tr>
+                    <tr><td>Carlos Quishpe</td><td>2,000</td><td>Capital, Conocimiento</td></tr>
+                    <tr><td>Otros 6 socios</td><td>~8,300</td><td>Capital, Terreno, M. Obra, etc.</td></tr>
+                </tbody>
+            </table>
+            <p class="info-legal">
+                La asociación cuenta con estatutos definidos, marca registrada ante el SENADI y cumple con todos los registros sanitarios pertinentes para la producción y comercialización.
+            </p>
+        </div>
+
+        <!-- Diapositiva 5: Agradecimiento -->
+        <div class="diapositiva" id="diapositiva-5">
+             <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" 
+                 alt="Logo del Instituto Superior Tecnológico Mejía" 
+                 class="logo-instituto"
+                 onerror="this.style.display='none'">
+            <h1>¡Gracias por su atención!</h1>
+            <p class="integrantes">
+                Integrantes: Luis Pinta, Jessica Nishve y Rosa Altamirano
+            </p>
+        </div>
+
+        <!-- Indicador de Navegación -->
+        <div class="indicador-navegacion">
+            Use las teclas de flecha (← →) para navegar
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.diapositiva');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('activa', 'anterior');
+                    if (i === index) {
+                        slide.classList.add('activa');
+                    } else if (i < index) {
+                        slide.classList.add('anterior');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            }
+
+            function prevSlide() {
+                 if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+
+            // Listener para las teclas
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    prevSlide();
+                }
+            });
+
+            // Inicializar la presentación
+            showSlide(currentSlide);
+        });
+    </script>
+
+</body>
+</html>
