@@ -45,6 +45,7 @@
             border-radius: 16px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             background: white;
+            touch-action: pan-y; /* Permite el scroll vertical pero no el horizontal del navegador */
         }
 
         /* --- Estilo de las Diapositivas --- */
@@ -212,25 +213,11 @@
             margin-top: 2rem;
         }
 
-        /* --- Indicador de Navegación --- */
-        .indicador-navegacion {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            color: #aaa;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.7);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-        }
-
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             .diapositiva {
                 padding: 2rem;
-                overflow-y: auto;
+                overflow-y: auto; /* Permite scroll vertical si el contenido no cabe */
             }
             .diapositiva h1 { font-size: 2.5rem; }
             .diapositiva h2 { font-size: 2rem; }
@@ -340,8 +327,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.presentacion-container');
             const slides = document.querySelectorAll('.diapositiva');
             let currentSlide = 0;
+            
+            // Variables para el control táctil
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSwiping = false;
 
             function showSlide(index) {
                 slides.forEach((slide, i) => {
@@ -376,6 +369,30 @@
                     prevSlide();
                 }
             });
+
+            // Listeners para gestos táctiles (deslizar)
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                isSwiping = true;
+            });
+
+            container.addEventListener('touchend', (e) => {
+                if (!isSwiping) return;
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                isSwiping = false;
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50; // Mínima distancia en píxeles para considerar un swipe
+                if (touchStartX - touchEndX > swipeThreshold) {
+                    // Deslizar hacia la izquierda (siguiente diapositiva)
+                    nextSlide();
+                } else if (touchEndX - touchStartX > swipeThreshold) {
+                    // Deslizar hacia la derecha (diapositiva anterior)
+                    prevSlide();
+                }
+            }
 
             // Inicializar la presentación
             showSlide(currentSlide);
