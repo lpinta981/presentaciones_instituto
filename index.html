@@ -157,6 +157,40 @@
         .comparison-table tr:nth-child(even) { background-color: #f9f9f9; }
         .comparison-table .our-product { background-color: #f0f5ff; font-weight: bold; }
 
+        /* NEW STYLES FOR PRODUCT SHOWCASE */
+        .product-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .product-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(22, 39, 94, 0.1);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 8px; /* <-- Added this line */
+        }
+        .product-card h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
         .nav-arrows { position: fixed; bottom: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; z-index: 10; transform: translateY(50%); }
         .arrow { font-size: 3rem; color: rgba(0, 0, 0, 0.2); cursor: pointer; user-select: none; transition: color 0.3s; }
         .arrow:hover { color: rgba(0, 0, 0, 0.5); }
@@ -172,6 +206,8 @@
             .nav-arrows { display: none; }
             .comparison-table { font-size: 0.8rem; }
             .comparison-table th, .comparison-table td { padding: 8px; }
+            .product-showcase { grid-template-columns: 1fr; }
+            .product-card img { height: 150px; }
         }
     </style>
 </head>
@@ -187,20 +223,29 @@
             </header>
             <div class="slide-content">
                 <h1>Estudio de Mercado: Computadora "Kit Customer Service"</h1>
-                <p class="presenter-info"><strong>Presentado por:</strong> Luis Pinta <br> Administración de Empresas | 3er Semestre</p>
+                <p class="presenter-info"><strong>Presentado por:</strong> Luis Pinta <br> Administración de Empresas | 3er Semestre <br><strong>Docente:</strong> ING. Fernando Zumárraga</p>
             </div>
         </div>
 
-        <!-- Slide 2: Product Description -->
+        <!-- Slide 2: Product Description with Images -->
         <div class="slide">
             <div class="slide-content">
-                <h2>¿Qué es "Kit Customer Service"?</h2>
-                <p>Es una solución informática integral diseñada para puntos de venta y atención al cliente en PYMES de Machachi.</p>
-                <ul>
-                    <li><strong>Componentes:</strong> Torre (CPU con 8GB de RAM), monitor HP de 24", teclado y mouse inalámbricos.</li>
-                    <li><strong>Diseño:</strong> Moderno, elegante y sobrio, con acabados de calidad.</li>
-                    <li><strong>Propuesta de Valor:</strong> Ofrecer un equipo de calidad "premium moderada" con el valor añadido de un servicio local personalizado.</li>
-                </ul>
+                <h2>Componentes del "Kit Customer Service"</h2>
+                <p>Una solución informática integral, diseñada para optimizar el punto de venta y la atención al cliente en negocios locales. Potencia, elegancia y soporte garantizado.</p>
+                <div class="product-showcase">
+                    <div class="product-card">
+                        <img src="https://novicompu.vtexassets.com/arquivos/ids/168941-800-auto?v=638405993356800000&width=800&height=auto&aspect=true" alt="Monitor HP de 24 pulgadas">
+                        <h3>Monitor HP 24"</h3>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://www.tecnotrade.com.ec/wp-content/uploads/2022/10/PAGINA-WEB-2022-10-24T225517.102.jpg" alt="CPU Torre con 8GB RAM">
+                        <h3>CPU Torre 8GB RAM</h3>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://lavictoria.ec/wp-content/uploads/2023/01/TECLADO-MAS-MOUSE-INALAMBRICO-LOGITECH-MK270-4-600x600.jpg" alt="Teclado y Mouse Inalámbricos Logitech">
+                        <h3>Teclado y Mouse Inalámbricos</h3>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -295,66 +340,105 @@
             </div>
         </div>
         
-        <!-- Slide 10: Cost Analysis -->
+        <!-- Slide 10: Cost Structure Overview -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Estructura de Costos</h2>
                  <div class="grid-container">
-                    <div class="grid-item"><h3>Costos Fijos Mensuales</h3><p>Total: <span class="highlight">$2,400</span> (Incluye alquiler, personal, capacitadores e instaladores).</p></div>
-                    <div class="grid-item"><h3>Costo Variable por Kit</h3><p>Objetivo: <span class="highlight">$500</span>. Es fundamental optimizar el costo para que el negocio sea sostenible.</p></div>
+                    <div class="grid-item"><h3>Costos Directos (Variables)</h3><p>Asociados a cada kit vendido. El objetivo es mantenerlos en <span class="highlight">$540</span> por unidad.</p></div>
+                    <div class="grid-item"><h3>Costos Indirectos (Fijos)</h3><p>Gastos mensuales para operar el negocio, independientemente de las ventas. Proyectados en <span class="highlight">$2,700</span>.</p></div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 11: NEW - Cost Classification -->
+        <!-- Slide 11: Personnel and Administrative Expenses -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Gastos de Personal y Administrativos</h2>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>Gasto de Personal (Mensual)</h3>
+                        <ul>
+                            <li><strong>Gerente (Luis Pinta):</strong> $800</li>
+                            <li><strong>Asesor Comercial (Carlos Vega):</strong> $650</li>
+                            <li><strong>Técnica (Ana Torres):</strong> $550</li>
+                            <li><strong>Total Sueldos:</strong> <span class="highlight">$2,000</span></li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Gastos Administrativos (Mensual)</h3>
+                        <ul>
+                            <li><strong>Alquiler y Servicios Básicos:</strong> $500</li>
+                            <li><strong>Marketing y Publicidad:</strong> $120</li>
+                            <li><strong>Suministros de Oficina:</strong> $80</li>
+                            <li><strong>Total Admin:</strong> <span class="highlight">$700</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Cost Classification -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Clasificación de Costos</h2>
-                <p>Un desglose más detallado para un análisis financiero preciso.</p>
+                <p>Un desglose detallado para un análisis financiero preciso.</p>
                 <div class="grid-container">
                     <div class="grid-item">
                         <h3>Costos Directos (Por Kit)</h3>
                         <ul>
-                            <li><strong>Materiales:</strong> $500</li>
+                            <li><strong>Adquisición de Componentes (Materia Prima):</strong> $500</li>
                             <li><strong>Mano de Obra Directa (Instalación):</strong> $40</li>
                             <li><strong>Total Costo Directo:</strong> <span class="highlight">$540</span></li>
                         </ul>
                     </div>
                     <div class="grid-item">
-                        <h3>Costos Indirectos (Mensuales)</h3>
+                        <h3>Costos Indirectos (Fijos Mensuales)</h3>
                         <ul>
-                            <li><strong>Alquiler y Servicios Básicos:</strong> $500</li>
-                            <li><strong>Personal Admin. y Ventas:</strong> $1,200</li>
-                            <li><strong>Marketing y Suministros:</strong> $200</li>
-                            <li><strong>Total Costo Indirecto:</strong> <span class="highlight">$1,900</span></li>
+                            <li><strong>Gastos de Personal:</strong> $2,000</li>
+                            <li><strong>Gastos Administrativos:</strong> $700</li>
+                            <li><strong>Total Costo Indirecto:</strong> <span class="highlight">$2,700</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 12: UPDATED - Break-Even Point -->
+        <!-- Slide 13: Detailed Break-Even Point -->
         <div class="slide">
             <div class="slide-content">
-                <h2>Punto de Equilibrio (Ajustado)</h2>
-                <p>Con una clasificación más detallada, el nuevo margen de contribución es de $80 por kit.</p>
-                <p style="margin-top:20px;">Se necesita vender <span class="highlight" style="font-size: 4rem;">24</span> unidades al mes para cubrir todos los costos.</p>
-                <p>(Equivalente a $14,880 en ventas mensuales)</p>
+                <h2>Análisis Detallado del Punto de Equilibrio</h2>
+                <p>Cálculo para determinar las ventas necesarias para cubrir todos los costos.</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Concepto</th><th>Cálculo</th><th>Valor</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Precio de Venta por Unidad</td><td>-</td><td>$620</td></tr>
+                        <tr><td>Costo Directo por Unidad</td><td>-</td><td>$540</td></tr>
+                        <tr class="our-product"><td>Margen de Contribución por Unidad</td><td>$620 - $540</td><td>$80</td></tr>
+                        <tr><td>Costos Fijos Totales Mensuales</td><td>$2,000 + $700</td><td>$2,700</td></tr>
+                        <tr class="our-product"><td><b>Unidades para Punto de Equilibrio</b></td><td>$2,700 / $80</td><td><b>34 Unidades</b></td></tr>
+                        <tr><td>Venta Total en Equilibrio</td><td>34 x $620</td><td>$21,080</td></tr>
+                        <tr><td>Costo Total en Equilibrio</td><td>(34 x $540) + $2,700</td><td>$21,060</td></tr>
+                        <tr class="our-product"><td><b>Utilidad Neta en Equilibrio</b></td><td>$21,080 - $21,060</td><td><b>$20 (Ganancia)</b></td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Slide 13: Feasibility Analysis -->
+        <!-- Slide 14: Feasibility Analysis -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Análisis de Factibilidad</h2>
                 <div class="grid-container">
                     <div class="grid-item"><h3>Factibilidad Comercial: <span style="color: #4CAF50;">ALTA</span></h3><p>Existe una necesidad real y un nicho de mercado, apoyado por la tendencia a la digitalización.</p></div>
-                    <div class="grid-item"><h3>Factibilidad Financiera: <span style="color: #FFC107;">MODERADA</span></h3><p>El éxito está condicionado a optimizar costos. El nuevo punto de equilibrio de 24 unidades es un objetivo claro y alcanzable.</p></div>
+                    <div class="grid-item"><h3>Factibilidad Financiera: <span style="color: #FFC107;">MODERADA</span></h3><p>El éxito está condicionado a optimizar costos. El nuevo punto de equilibrio de 34 unidades es un objetivo claro y alcanzable.</p></div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 14: Marketing Strategy -->
+        <!-- Slide 15: Marketing Strategy -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Estrategia de Marketing y Ventas</h2>
@@ -367,7 +451,7 @@
             </div>
         </div>
 
-        <!-- Slide 15: Conclusions -->
+        <!-- Slide 16: Conclusions -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Conclusión y Recomendaciones</h2>
@@ -381,7 +465,7 @@
             </div>
         </div>
         
-        <!-- Slide 16: Proyecciones a Futuro -->
+        <!-- Slide 17: Proyecciones a Futuro -->
         <div class="slide">
             <div class="slide-content">
                 <h2>Proyecciones y Siguientes Pasos</h2>
@@ -394,7 +478,15 @@
             </div>
         </div>
 
-        <!-- Slide 17: Thank You -->
+        <!-- Slide 18: Final Message -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Mensaje Final</h2>
+                <p>"Kit Customer Service" no es solo vender computadoras, es ser el <span class="highlight">socio tecnológico</span> de confianza para el crecimiento de los negocios en Machachi, ofreciendo una solución local, personalizada y con un servicio postventa inigualable.</p>
+            </div>
+        </div>
+
+        <!-- Slide 19: Thank You -->
         <div class="slide title-slide">
             <div class="slide-content">
                 <h1 style="font-size: 5rem;">Gracias</h1>
