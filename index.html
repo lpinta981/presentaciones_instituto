@@ -69,8 +69,8 @@
 
         .slide-header, .slide-footer {
             position: absolute;
-            width: 100%;
-            padding: 20px 60px;
+            width: calc(100% - 120px);
+            left: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -78,11 +78,11 @@
         }
 
         .slide-header {
-            top: 0;
+            top: 20px;
         }
 
         .slide-footer {
-            bottom: 0;
+            bottom: 20px;
             font-size: 0.9em;
             color: #888;
         }
@@ -115,16 +115,11 @@
             padding-bottom: 10px;
         }
 
-        .slide h1 {
-            font-size: 3rem;
-        }
-
-        .slide h2 {
-            font-size: 2.5rem;
-        }
+        .slide h1 { font-size: 3rem; }
+        .slide h2 { font-size: 2.5rem; }
 
         .slide p, .slide li {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.7;
             color: var(--text-secondary);
         }
@@ -140,97 +135,43 @@
             padding: 10px 0;
             border-bottom: 1px solid #e0e0e0;
         }
+        .slide li:last-child { border-bottom: none; }
+        .slide li strong { color: var(--color-primary); font-weight: 600; }
+        
+        .slide.title-slide { justify-content: center; }
+        .title-slide .presenter-info { margin-top: 20px; font-size: 1.4rem; font-weight: 300; }
+        
+        .highlight { color: var(--color-secondary); font-weight: 700; font-size: 1.5em; }
 
-        .slide li:last-child {
-            border-bottom: none;
-        }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; margin-top: 30px; }
+        .grid-container.three-cols { grid-template-columns: 1fr 1fr 1fr; }
         
-        .slide li strong {
-            color: var(--color-primary);
-            font-weight: 600;
-        }
+        .grid-item { background-color: #f7f7f7; padding: 25px; border-radius: 8px; border-left: 5px solid var(--color-secondary); }
+        .grid-item h3 { color: var(--color-primary); margin-bottom: 10px; font-size: 1.3rem; }
+        .grid-item ul { margin-top: 0; }
+        .grid-item li { font-size: 1rem; padding: 8px 0; }
         
-        .slide.title-slide {
-            justify-content: center;
-        }
-        
-        .title-slide .presenter-info {
-            margin-top: 20px;
-            font-size: 1.4rem;
-            font-weight: 300;
-        }
-        
-        .highlight {
-            color: var(--color-secondary);
-            font-weight: 700;
-            font-size: 1.5em;
-        }
+        .comparison-table { width: 100%; margin-top: 20px; border-collapse: collapse; text-align: left; }
+        .comparison-table th, .comparison-table td { padding: 12px 15px; border-bottom: 1px solid #ddd; }
+        .comparison-table th { background-color: var(--color-primary); color: var(--color-light); font-weight: 600; }
+        .comparison-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .comparison-table .our-product { background-color: #f0f5ff; font-weight: bold; }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            text-align: left;
-            margin-top: 30px;
-        }
-        
-        .grid-item {
-            background-color: #f7f7f7;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 5px solid var(--color-secondary);
-        }
+        .nav-arrows { position: fixed; bottom: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; z-index: 10; transform: translateY(50%); }
+        .arrow { font-size: 3rem; color: rgba(0, 0, 0, 0.2); cursor: pointer; user-select: none; transition: color 0.3s; }
+        .arrow:hover { color: rgba(0, 0, 0, 0.5); }
 
-        .grid-item h3 {
-            color: var(--color-primary);
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .nav-arrows {
-            position: fixed;
-            bottom: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 10;
-            transform: translateY(50%);
-        }
-        
-        .arrow {
-            font-size: 3rem;
-            color: rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.3s;
-        }
-        
-        .arrow:hover {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .slide {
-                padding: 20px 25px;
-            }
-            .slide-header, .slide-footer {
-                padding: 15px 25px;
-            }
-            .logo {
-                width: 70px;
-            }
+            .slide { padding: 80px 25px; }
+            .slide-header, .slide-footer { padding: 15px 25px; width: calc(100% - 50px); left: 25px; }
+            .logo { width: 70px; }
             .slide h1 { font-size: 2rem; }
             .slide h2 { font-size: 1.8rem; }
             .slide p, .slide li { font-size: 1rem; }
-            .grid-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .nav-arrows {
-                display: none; /* Hide arrows on mobile where swipe is primary */
-            }
+            .grid-container, .grid-container.three-cols { grid-template-columns: 1fr; gap: 20px; }
+            .nav-arrows { display: none; }
+            .comparison-table { font-size: 0.8rem; }
+            .comparison-table th, .comparison-table td { padding: 8px; }
         }
     </style>
 </head>
@@ -246,18 +187,12 @@
             </header>
             <div class="slide-content">
                 <h1>Estudio de Mercado: Computadora "Kit Customer Service"</h1>
-                <p class="presenter-info">
-                    <strong>Presentado por:</strong> Luis Pinta <br>
-                    Administración de Empresas | 3er Semestre
-                </p>
+                <p class="presenter-info"><strong>Presentado por:</strong> Luis Pinta <br> Administración de Empresas | 3er Semestre</p>
             </div>
         </div>
 
         <!-- Slide 2: Product Description -->
         <div class="slide">
-            <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
                 <h2>¿Qué es "Kit Customer Service"?</h2>
                 <p>Es una solución informática integral diseñada para puntos de venta y atención al cliente en PYMES de Machachi.</p>
@@ -267,157 +202,176 @@
                     <li><strong>Propuesta de Valor:</strong> Ofrecer un equipo de calidad "premium moderada" con el valor añadido de un servicio local personalizado.</li>
                 </ul>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 2 / 10</span>
-            </footer>
         </div>
         
         <!-- Slide 3: Market Demand -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
                 <h2>Análisis de la Demanda</h2>
                 <p>El mercado objetivo son las micro y pequeñas empresas de Machachi que buscan modernizar sus equipos.</p>
                 <div class="grid-container">
-                    <div class="grid-item">
-                        <h3>Perfil del Cliente</h3>
-                        <p>Pequeños empresarios de sectores como ferreterías, farmacias, restaurantes y cooperativas.</p>
-                    </div>
-                    <div class="grid-item">
-                        <h3>Tendencia Clave</h3>
-                        <p>El <span class="highlight">91%</span> de las pymes en Ecuador planea invertir en su digitalización, lo que representa una oportunidad significativa.</p>
-                    </div>
+                    <div class="grid-item"><h3>Perfil del Cliente</h3><p>Pequeños empresarios de sectores como ferreterías, farmacias, restaurantes y cooperativas.</p></div>
+                    <div class="grid-item"><h3>Tendencia Clave</h3><p>El <span class="highlight">91%</span> de las pymes en Ecuador planea invertir en su digitalización, representando una oportunidad significativa.</p></div>
                 </div>
             </div>
-            <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 3 / 10</span>
-            </footer>
         </div>
         
         <!-- Slide 4: Customer Insights -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
                 <h2>Opiniones de Clientes Potenciales</h2>
                  <ul>
-                    <li><strong>Precio Inicial ($620):</strong> Fue percibido como "ligeramente alto" al principio por algunos empresarios locales.</li>
+                    <li><strong>Precio Inicial ($620):</strong> Percibido como "ligeramente alto" al principio por algunos empresarios locales.</li>
                     <li><strong>Percepción de Valor:</strong> Tras probar el equipo, consideraron el precio justo, valorando la elegancia y la rapidez.</li>
                     <li><strong>Preferencia Local:</strong> Los clientes de Machachi prefieren comprar en locales de la zona por la confianza y la facilidad para gestionar garantías.</li>
                 </ul>
             </div>
-            <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 4 / 10</span>
-            </footer>
         </div>
 
-        <!-- Slide 5: Competitive Analysis -->
+        <!-- Slide 5: Competencia Local -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
-                <h2>Análisis de la Competencia</h2>
-                <div class="grid-container">
-                    <div class="grid-item">
-                        <h3>Competidor Directo</h3>
-                        <p><strong>WSA Technologys</strong> es el principal vendedor de productos similares en Machachi.</p>
-                    </div>
-                    <div class="grid-item">
-                        <h3>Estrategia Competitiva</h3>
-                        <p>Ofrecer un precio ligeramente más bajo, incluir un protector de voltaje y brindar una asesoría personalizada con servicio postventa cercano.</p>
-                    </div>
+                <h2>Competencia Local Directa</h2>
+                 <div class="grid-container">
+                    <div class="grid-item"><h3>Principal Competidor</h3><p><strong>WSA Technologys</strong> es actualmente el principal vendedor de productos similares en la localidad.</p></div>
+                    <div class="grid-item"><h3>Estrategia Frente a Ellos</h3><p>Ofrecer un precio ligeramente más bajo, incluir un protector de voltaje y brindar una asesoría personalizada con servicio postventa cercano.</p></div>
                 </div>
             </div>
-            <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 5 / 10</span>
-            </footer>
         </div>
         
-        <!-- Slide 6: Cost Analysis -->
+        <!-- Slide 6: Comparison Table -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
+            <div class="slide-content">
+                <h2>Tabla Comparativa de Opciones</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Producto / Especificaciones</th><th>Precio Aprox. (USD)</th><th>Notas Clave</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="our-product"><td>Kit Customer Service (Propuesta)</td><td>$620</td><td>Nuevo, calidad, servicio local en Machachi.</td></tr>
+                        <tr><td>PC Ensamblado Local + Monitor 24"</td><td>$729</td><td>Hardware moderno, monitor por separado.</td></tr>
+                        <tr><td>Lenovo All-in-One (Básico)</td><td>$480</td><td>Marca reconocida, prestaciones básicas.</td></tr>
+                        <tr><td>HP All-in-One (Gama Media)</td><td>$711</td><td>Marca líder, buen rendimiento, precio superior.</td></tr>
+                        <tr><td>PC Reacondicionado + Monitor 19"</td><td>$222</td><td>Económico, menor rendimiento, garantía limitada.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 7: National Competitors -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Competencia Nacional (Grandes Almacenes)</h2>
+                <p>Cadenas como Artefacta, La Ganga, o grandes tiendas en Quito representan una competencia indirecta.</p>
+                <div class="grid-container">
+                    <div class="grid-item"><h3>Fortalezas</h3><p>Reconocimiento de marca, opciones de crédito directo, marketing masivo.</p></div>
+                    <div class="grid-item"><h3>Debilidades</h3><p>Servicio postventa centralizado y lento, poca personalización, sin asesoría especializada para negocios locales.</p></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Online Competitors -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Competencia Online (Amazon / Importación)</h2>
+                <p>La compra en línea es una alternativa atractiva, pero con desventajas importantes para el mercado local.</p>
+                <div class="grid-container">
+                    <div class="grid-item"><h3>Fortalezas</h3><p>Precios potencialmente más bajos en el producto base, gran variedad de marcas y configuraciones.</p></div>
+                    <div class="grid-item"><h3>Debilidades</h3><p>Costos de envío, impuestos de importación, largos tiempos de espera, garantía difícil de ejecutar y ausencia total de soporte técnico local.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Our Competitive Advantage -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Nuestra Ventaja Competitiva Clave</h2>
+                <p>¿Por qué elegirnos frente a las otras opciones?</p>
+                <div class="grid-container three-cols">
+                    <div class="grid-item"><h3>Proximidad y Confianza</h3><p>Somos un negocio local, para negocios locales. Entendemos sus necesidades.</p></div>
+                    <div class="grid-item"><h3>Servicio Integral</h3><p>Ofrecemos asesoría, venta, instalación, capacitación y soporte técnico. Todo en un solo lugar.</p></div>
+                    <div class="grid-item"><h3>Garantía Real e Inmediata</h3><p>Cualquier problema se resuelve aquí en Machachi, sin envíos ni largas esperas.</p></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 10: Cost Analysis -->
+        <div class="slide">
             <div class="slide-content">
                 <h2>Estructura de Costos</h2>
                  <div class="grid-container">
+                    <div class="grid-item"><h3>Costos Fijos Mensuales</h3><p>Total: <span class="highlight">$2,400</span> (Incluye alquiler, personal, capacitadores e instaladores).</p></div>
+                    <div class="grid-item"><h3>Costo Variable por Kit</h3><p>Objetivo: <span class="highlight">$500</span>. Es fundamental optimizar el costo para que el negocio sea sostenible.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: NEW - Cost Classification -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Clasificación de Costos</h2>
+                <p>Un desglose más detallado para un análisis financiero preciso.</p>
+                <div class="grid-container">
                     <div class="grid-item">
-                        <h3>Costos Fijos Mensuales</h3>
-                        <p>Total: <span class="highlight">$2,400</span></p>
-                        <p>(Incluye alquiler, personal, capacitadores e instaladores).</p>
+                        <h3>Costos Directos (Por Kit)</h3>
+                        <ul>
+                            <li><strong>Materiales:</strong> $500</li>
+                            <li><strong>Mano de Obra Directa (Instalación):</strong> $40</li>
+                            <li><strong>Total Costo Directo:</strong> <span class="highlight">$540</span></li>
+                        </ul>
                     </div>
                     <div class="grid-item">
-                        <h3>Costo Variable por Kit</h3>
-                        <p>Objetivo: <span class="highlight">$500</span></p>
-                        <p>Es fundamental optimizar el costo inicial de $600 a $500 para que el negocio sea sostenible.</p>
+                        <h3>Costos Indirectos (Mensuales)</h3>
+                        <ul>
+                            <li><strong>Alquiler y Servicios Básicos:</strong> $500</li>
+                            <li><strong>Personal Admin. y Ventas:</strong> $1,200</li>
+                            <li><strong>Marketing y Suministros:</strong> $200</li>
+                            <li><strong>Total Costo Indirecto:</strong> <span class="highlight">$1,900</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 6 / 10</span>
-            </footer>
         </div>
 
-        <!-- Slide 7: Break-Even Point -->
+        <!-- Slide 12: UPDATED - Break-Even Point -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
-                <h2>Punto de Equilibrio</h2>
-                <p>Con un precio de venta de $620 y un costo optimizado de $500, el margen de contribución es de $120 por kit.</p>
-                <p style="margin-top:20px;">Se necesita vender:</p>
-                <p><span class="highlight" style="font-size: 4rem;">20</span></p>
-                <p>unidades al mes para cubrir todos los costos.</p>
-                <p>(Equivalente a $12,400 en ventas mensuales).</p>
+                <h2>Punto de Equilibrio (Ajustado)</h2>
+                <p>Con una clasificación más detallada, el nuevo margen de contribución es de $80 por kit.</p>
+                <p style="margin-top:20px;">Se necesita vender <span class="highlight" style="font-size: 4rem;">24</span> unidades al mes para cubrir todos los costos.</p>
+                <p>(Equivalente a $14,880 en ventas mensuales)</p>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 7 / 10</span>
-            </footer>
         </div>
 
-        <!-- Slide 8: Feasibility Analysis -->
+        <!-- Slide 13: Feasibility Analysis -->
         <div class="slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
             <div class="slide-content">
                 <h2>Análisis de Factibilidad</h2>
                 <div class="grid-container">
-                    <div class="grid-item">
-                        <h3>Factibilidad Comercial: <span style="color: #4CAF50;">ALTA</span></h3>
-                        <p>Existe una necesidad real y un nicho de mercado en Machachi, apoyado por la tendencia a la digitalización.</p>
-                    </div>
-                    <div class="grid-item">
-                        <h3>Factibilidad Financiera: <span style="color: #FFC107;">MODERADA</span></h3>
-                        <p>El éxito está condicionado a optimizar costos, ya que el margen inicial es ajustado y el punto de equilibrio es exigente.</p>
-                    </div>
+                    <div class="grid-item"><h3>Factibilidad Comercial: <span style="color: #4CAF50;">ALTA</span></h3><p>Existe una necesidad real y un nicho de mercado, apoyado por la tendencia a la digitalización.</p></div>
+                    <div class="grid-item"><h3>Factibilidad Financiera: <span style="color: #FFC107;">MODERADA</span></h3><p>El éxito está condicionado a optimizar costos. El nuevo punto de equilibrio de 24 unidades es un objetivo claro y alcanzable.</p></div>
                 </div>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 8 / 10</span>
-            </footer>
         </div>
 
-        <!-- Slide 9: Conclusions -->
+        <!-- Slide 14: Marketing Strategy -->
         <div class="slide">
-            <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-            </header>
+            <div class="slide-content">
+                <h2>Estrategia de Marketing y Ventas</h2>
+                <p>¿Cómo llegaremos a nuestros clientes?</p>
+                <div class="grid-container three-cols">
+                    <div class="grid-item"><h3>Visitas Directas</h3><p>Presentación del producto directamente en los negocios de Machachi.</p></div>
+                    <div class="grid-item"><h3>Marketing Digital Local</h3><p>Publicidad en redes sociales segmentada para dueños de negocios en la zona.</p></div>
+                    <div class="grid-item"><h3>Alianzas Estratégicas</h3><p>Colaboración con contadores, cámaras de comercio locales y asociaciones.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusions -->
+        <div class="slide">
             <div class="slide-content">
                 <h2>Conclusión y Recomendaciones</h2>
-                <p>El proyecto es factible, pero el éxito dependerá de una ejecución cuidadosa.</p>
+                <p>El proyecto es factible, pero el éxito dependerá de una ejecución cuidadosa y enfocada en el valor local.</p>
                 <ul>
                     <li><strong>Optimizar Costos:</strong> Es la prioridad número uno para mejorar el margen de ganancia.</li>
                     <li><strong>Comunicar el Valor:</strong> Centrar el marketing en la calidad, el diseño y el soporte técnico local.</li>
@@ -425,26 +379,27 @@
                     <li><strong>Planificación Financiera:</strong> Asegurar capital de trabajo para los primeros 3 a 6 meses.</li>
                 </ul>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 9 / 10</span>
-            </footer>
+        </div>
+        
+        <!-- Slide 16: Proyecciones a Futuro -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Proyecciones y Siguientes Pasos</h2>
+                <p>Mirando más allá del lanzamiento inicial.</p>
+                <div class="grid-container three-cols">
+                    <div class="grid-item"><h3>Expansión Geográfica</h3><p>Evaluar la expansión a cantones cercanos como Mejía y Rumiñahui tras consolidar el mercado en Machachi.</p></div>
+                    <div class="grid-item"><h3>Nuevos Servicios</h3><p>Ofrecer contratos de mantenimiento preventivo y soporte técnico mensual para generar ingresos recurrentes.</p></div>
+                    <div class="grid-item"><h3>Ampliar Catálogo</h3><p>Incorporar laptops, impresoras y otros periféricos para convertirnos en un proveedor tecnológico integral.</p></div>
+                </div>
+            </div>
         </div>
 
-        <!-- Slide 10: Thank You -->
+        <!-- Slide 17: Thank You -->
         <div class="slide title-slide">
-             <header class="slide-header">
-                <img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">
-                 <div class="institute-name">INSTITUTO SUPERIOR TECNOLÓGICO MEJÍA</div>
-            </header>
             <div class="slide-content">
                 <h1 style="font-size: 5rem;">Gracias</h1>
                 <p class="presenter-info">¿Preguntas?</p>
             </div>
-             <footer class="slide-footer">
-                <span>Luis Pinta | ISTM</span>
-                <span>Diapositiva 10 / 10</span>
-            </footer>
         </div>
         
         <!-- Navigation Arrows -->
@@ -457,9 +412,33 @@
 
     <script>
         const slides = document.querySelectorAll('.slide');
+        const presentationContainer = document.getElementById('presentation-container');
         const nextArrow = document.getElementById('next-arrow');
         const prevArrow = document.getElementById('prev-arrow');
         let currentSlide = 0;
+
+        function updateSlideHeadersAndFooters() {
+            slides.forEach((slide, i) => {
+                if (slide.classList.contains('title-slide')) {
+                    return;
+                }
+
+                let existingHeader = slide.querySelector('.slide-header');
+                if (existingHeader) existingHeader.remove();
+                let existingFooter = slide.querySelector('.slide-footer');
+                if (existingFooter) existingFooter.remove();
+
+                const header = document.createElement('header');
+                header.className = 'slide-header';
+                header.innerHTML = `<img src="https://i.postimg.cc/02MXy6SH/channels4-profile-1.jpg" alt="Logo Instituto" class="logo">`;
+                slide.prepend(header);
+                
+                const footer = document.createElement('footer');
+                footer.className = 'slide-footer';
+                footer.innerHTML = `<span>Luis Pinta | ISTM</span><span>Diapositiva ${i + 1} / ${slides.length}</span>`;
+                slide.append(footer);
+            });
+        }
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -483,44 +462,27 @@
             showSlide(prevIndex);
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+            if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
         });
         
-        // Arrow click navigation
         nextArrow.addEventListener('click', nextSlide);
         prevArrow.addEventListener('click', prevSlide);
 
-        // Swipe navigation
-        const container = document.getElementById('presentation-container');
         let touchstartX = 0;
         let touchendX = 0;
 
-        container.addEventListener('touchstart', function(event) {
-            touchstartX = event.changedTouches[0].screenX;
+        presentationContainer.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX, false);
+        presentationContainer.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            const swipeThreshold = 50;
+            if (touchendX < touchstartX - swipeThreshold) nextSlide();
+            if (touchendX > touchstartX + swipeThreshold) prevSlide();
         }, false);
 
-        container.addEventListener('touchend', function(event) {
-            touchendX = event.changedTouches[0].screenX;
-            handleSwipe();
-        }, false);
-
-        function handleSwipe() {
-            const swipeThreshold = 50; // minimum distance for a swipe
-            if (touchendX < touchstartX - swipeThreshold) {
-                nextSlide();
-            }
-            if (touchendX > touchstartX + swipeThreshold) {
-                prevSlide();
-            }
-        }
-
-        // Initialize first slide
+        // Initial setup
+        updateSlideHeadersAndFooters();
         showSlide(0);
     </script>
 </body>
